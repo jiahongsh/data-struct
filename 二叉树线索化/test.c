@@ -1,4 +1,4 @@
-﻿#include<stdio.h>
+#include<stdio.h>
 
 typedef int TreeStyle;
 
@@ -16,10 +16,11 @@ void visit(ThreadTree* T) {
 		T->lchild = pre;
 		T->ltag = 1;
 	}
-	if (pre != NULL && T->rchild == NULL) {
-		T->rchild = pre;
-		T->rtag = 1;
+	if (pre != NULL && pre->rchild == NULL) {
+		pre->rchild = T;
+		pre->rtag = 1;
 	}
+    pre=T;
 }
 //中序
 void InThread(ThreadTree* T){//相当与中序遍历这个树
@@ -38,5 +39,8 @@ void CreateInThread(ThreadTree* T) {
 	}
 	//该树不为空树时，进行访问
 	InThread(T);
+    if(pre->rchild==NULL){
+        pre->rtag=1;
+    }
 }
 
